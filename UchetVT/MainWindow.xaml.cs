@@ -46,7 +46,7 @@ namespace UchetVT
         {
             if (string.IsNullOrEmpty(CurrentUser.AccessToBook)) this.NRIButton.Visibility = Visibility.Hidden;
             this.Title += " --" + CurrentUser.Name;
-            Application.Current.Properties.Add("AccessToRegion", CurrentUser.AccessToRegion);
+            System.Windows.Application.Current.Properties.Add("AccessToRegion", CurrentUser.AccessToRegion);
 
             }
 
@@ -135,7 +135,7 @@ namespace UchetVT
                                     break;
                                 }
 
-                                case 99: //10:    Для реализации в будущем
+                                case 10:
                                 {
                                     MainListView.View = DB.Users.MakeView();
                                     MainListView.ItemsSource = DB.Users.GetAll();

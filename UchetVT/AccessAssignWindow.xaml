@@ -1,0 +1,14 @@
+﻿<Window x:Class="UchetVT.AccessAssignWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UchetVT"
+        mc:Ignorable="d"
+        Title="Права доступа" Height="482.41" Width="332.548" WindowStartupLocation="CenterOwner" Icon="Resources/rfid_chip.png" WindowStyle="ToolWindow" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <Grid>
+        <ListView Name="AccessControlListView" Margin="5">
+        </ListView>
+
+    </Grid>
+</Window>

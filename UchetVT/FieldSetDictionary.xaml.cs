@@ -97,5 +97,39 @@ namespace UchetVT
 
             upsCombo.ItemsSource = upsNames;
         }
+
+        private void EditAccess(object sender, RoutedEventArgs e)
+        {
+
+            var accessAssignWnd = new AccessAssignWindow();
+
+            foreach (Window window in System.Windows.Application.Current.Windows) if (window is AccessAssignWindow) accessAssignWnd.Owner = window;
+            accessAssignWnd.WorkWith = AccessAssignWindow.WorkWithVariants.Region;
+
+            accessAssignWnd.ShowDialog();
+            
+        }
+
+        private void RegionAccessChange(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show((string) ((Button) sender).Content); //Тут норм
+            var accessAssignWnd = new AccessAssignWindow
+            {
+                AccessString = (string)((Button)sender).Content,     // А тут, скотина, не принимает
+                WorkWith = AccessAssignWindow.WorkWithVariants.Region
+            };
+
+            accessAssignWnd.ShowDialog();
+        }
+
+
+        private void BookAccessChange(object sender, RoutedEventArgs e)
+        {
+            var accessAssignWnd = new AccessAssignWindow();
+            accessAssignWnd.AccessString = (string)((Button)sender).Content;
+            accessAssignWnd.WorkWith = AccessAssignWindow.WorkWithVariants.Book;
+
+
+        }
     }
 }

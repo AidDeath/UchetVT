@@ -53,9 +53,9 @@ namespace UchetVT
                 DatabaseUtility.OpenConnection(ConnectionString);
 
 
-                if (Application.Current.Properties["ConnectionString"] != null)
-                    Application.Current.Properties.Remove("ConnectionString");
-                Application.Current.Properties.Add("ConnectionString", ConnectionString);
+                if (System.Windows.Application.Current.Properties["ConnectionString"] != null)
+                    System.Windows.Application.Current.Properties.Remove("ConnectionString");
+                System.Windows.Application.Current.Properties.Add("ConnectionString", ConnectionString);
 
                 //Получаем из БД информацию о пользователе
                 var extUserDataTable = DatabaseUtility.GetTable("SELECT TOP 1 * FROM dbo.fn_t_GetExtendedUserData()");

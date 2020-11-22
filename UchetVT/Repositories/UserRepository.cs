@@ -27,7 +27,7 @@ namespace UchetVT
                     Position = row.Field<string>("Position"),
                     UserName = row.Field<string>("UserName"),
                     AccessToRegion = row.Field<string>("AccessToRegion"),
-                    AccessToBook = row.Field<string>("AccesToBooks")
+                    AccessToBook = row.Field<string>("AccessToBook")
                 });
             }
 

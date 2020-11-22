@@ -61,20 +61,17 @@
     </StackPanel>
 
     <StackPanel x:Key ="UserFieldSet">          <!--Пользователи-->
+        <!--Пользователи-->
         <TextBlock Text="ФИО пользователя:"/>
         <TextBox Text ="{Binding Path = Name, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Text="Должность пользователя:"/>
         <TextBox Text ="{Binding Path = Position, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Text="Имя входа (логин):"/>
         <TextBox Text ="{Binding Path = UserName, UpdateSourceTrigger=PropertyChanged}"/>
-
         <TextBlock Text="Доступ к данным районов:"/>
-        <TextBox  IsEnabled="False" Text ="{Binding Path = Name, UpdateSourceTrigger=PropertyChanged}">
-           
-        </TextBox>
-
+        <Button Content="{Binding Path=AccessToRegion , UpdateSourceTrigger=PropertyChanged}" MinHeight="30" Click="RegionAccessChange"></Button>
         <TextBlock Text="Доступ к справочникам:"/>
-        <TextBox Text ="{Binding Path = Name, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+        <Button Content="{Binding Path=AccessToBook , UpdateSourceTrigger=PropertyChanged}" MinHeight="30" Click="BookAccessChange"></Button>
     </StackPanel>
 
     <StackPanel x:Key="VTComputerFieldSet">          <!--Набор контролов для ввода данных по компьютеру-->
