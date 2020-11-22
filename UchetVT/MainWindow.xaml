@@ -1,0 +1,43 @@
+﻿<Window x:Class="UchetVT.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UchetVT"
+        mc:Ignorable="d"
+        Title="Учёт вычислительной техники" Height="487.532" Width="910.051" Icon="Resources/rfid_chip.png" MinWidth="910" MinHeight="450" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Window.Resources>
+        <ResourceDictionary Source="FieldSetDictionary.xaml"/>
+    </Window.Resources>
+    <Grid>
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width ="2*" />
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Name="TopButtonsPanel" Grid.Row="0" Grid.ColumnSpan="2"  Background="Lavender" Margin="1" >
+
+            <Button x:Name="CompButton" Content="Компьютеры" Margin="1" Padding="5" Click="CompButton_OnClick"/>
+            <Button x:Name="PrinterButton" Content="Принтеры" Margin="1" Padding="5" Click="PrinterButton_OnClick"/>
+            <Button x:Name="UPSButton" Content="ИБП" Margin="1" Padding="5" Click="UPSButton_OnClick"/>
+            <Button x:Name="NetworkDeviceButton" Content="Сетевое оборудование" Margin="1" Padding="5" Click="NetworkDeviceButton_OnClick"/>
+            <Button x:Name="NRIButton" Content="Справочники" HorizontalAlignment="Right" Margin="1" Padding="5" Click="NRIButton_OnClick"/>
+        </DockPanel>
+
+        <ListView Name="MainListView" Grid.Column="0" Grid.Row="1" MouseDoubleClick="MainListView_OnMouseDoubleClick"/>
+        <ListView Name="SideListView" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" MouseUp="SideListView_OnMouseUp" SelectionChanged="SideListView_OnMouseUp" />
+
+        <StackPanel x:Name="StackPanelBottom" Grid.Row="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" IsEnabled="True">
+            <Button x:Name="AddButton" Content="Добавить"  Width="100" Height="25" Margin="10,0" Click="AddButton_OnClick"/>
+            <Button x:Name="EditButton" Content="Изменить"  Width="100" Height="25" Margin="10,0" Click="EditButton_OnClick" />
+            <Button x:Name="DeleteButton" Content="Удалить"  Width="100" Height="25" Margin="10,0" Click="DeleteButton_OnClick"/>
+        </StackPanel>
+    </Grid>
+</Window>

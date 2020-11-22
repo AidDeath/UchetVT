@@ -1,0 +1,304 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:local="clr-namespace:UchetVT"
+                    x:Class="UchetVT.FieldSetDictionary"
+                    x:ClassModifier="public">
+                    
+   <!-- Наборы контролов для окна редактирования.
+   Справочник ресурсов подключен к форме RecordWindow.
+   Наборы контролов применяются из метода кнопок добавления и редактирования, при подготовке окна -->
+
+    <StackPanel x:Key ="BoardFieldSet" >   <!--Материнская плата-->
+        <TextBlock>Наименование платы:</TextBlock>
+        <TextBox MinWidth="100"  Text="{Binding Path= Motherboard}"></TextBox>
+        <TextBlock>Год выхода на рынок:</TextBlock>
+        <TextBox MinWidth="100" Text="{Binding Path= YearOut, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+            <!--Text="{Binding Path= YearOut, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"-->
+        </TextBox>
+    </StackPanel>
+
+    <StackPanel x:Key ="CPUFieldSet">       <!--Процессор-->
+        <TextBlock Text="Наименование процессора:"/>
+        <TextBox Text ="{Binding Path = NameCPU, UpdateSourceTrigger=PropertyChanged}"/>
+    </StackPanel>
+
+    <StackPanel x:Key ="HDDFieldSet">       <!--Жесткий диск-->
+        <TextBlock Text="Наименование жесткого диска:"/>
+        <TextBox Text ="{Binding Path = NameHDD, UpdateSourceTrigger=PropertyChanged}"/>
+    </StackPanel>
+
+    <StackPanel x:Key ="LicenseFieldSet">       <!--Лицензия-->
+        <TextBlock>Состояние лицензии:</TextBlock>
+        <TextBox MinWidth="100" Text="{Binding Path= LicenseState, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+    </StackPanel>
+
+    <StackPanel x:Key ="NetworkDeviceFieldSet">         <!--Коммутационное оборудование-->
+        <TextBlock Text="Наименование сетевого устройства:"/>
+        <TextBox Text ="{Binding Path = NameNetworkDevice, UpdateSourceTrigger=PropertyChanged}"/>
+    </StackPanel>
+
+    <StackPanel x:Key ="OSFieldSet">            <!--ОС-->
+        <TextBlock Text="Наименование операционной системы:"/>
+        <TextBox Text ="{Binding Path = NameOS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+    </StackPanel>
+
+    <StackPanel x:Key ="PrinterFieldSet">           <!--Печатная техника-->
+        <TextBlock Text="Наименование принтера:"/>
+        <TextBox Text ="{Binding Path = NamePrinter, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="Мультифункциональное устройство:"/>
+        <CheckBox IsChecked="{Binding Path=MFU}"/>
+        <TextBlock Text="Монохромный:"/>
+        <CheckBox IsChecked="{Binding Path=MonoColor, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="Лазерный:"/>
+        <CheckBox IsChecked="{Binding Path=LaserJet, UpdateSourceTrigger=PropertyChanged}"/>
+    </StackPanel>
+
+    <StackPanel x:Key ="UPSFieldSet">           <!--ИБП-->
+        <TextBlock Text="Наименование ИБП:"/>
+        <TextBox Text ="{Binding Path = NameUPS, UpdateSourceTrigger=PropertyChanged}"/>
+    </StackPanel>
+
+    <StackPanel x:Key ="UserFieldSet">          <!--Пользователи-->
+        <TextBlock Text="ФИО пользователя:"/>
+        <TextBox Text ="{Binding Path = Name, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="Должность пользователя:"/>
+        <TextBox Text ="{Binding Path = Position, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Text="Имя входа (логин):"/>
+        <TextBox Text ="{Binding Path = UserName, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock Text="Доступ к данным районов:"/>
+        <TextBox  IsEnabled="False" Text ="{Binding Path = Name, UpdateSourceTrigger=PropertyChanged}">
+           
+        </TextBox>
+
+        <TextBlock Text="Доступ к справочникам:"/>
+        <TextBox Text ="{Binding Path = Name, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
+    </StackPanel>
+
+    <StackPanel x:Key="VTComputerFieldSet">          <!--Набор контролов для ввода данных по компьютеру-->
+        <TextBlock Text="Материнская плата:"/>
+        <ComboBox Loaded="boardbox_OnLoaded" SelectedValue="{Binding Path=Board.Motherboard, UpdateSourceTrigger=PropertyChanged}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Процессор:" Grid.Column="0" Grid.Row="0"/>
+            <ComboBox Grid.Column="0" Grid.Row="1" SelectedIndex="0" SelectedItem="{Binding Path=Cpu.NameCPU, UpdateSourceTrigger=PropertyChanged}" Loaded="cpubox_OnLoaded"/>
+                <TextBlock Text="Частота, Hz:" Grid.Column="1" Grid.Row="0"/>
+            <TextBox Text="{Binding Path=CpuClockSpeed, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="1"></TextBox>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Жесткий диск:" Grid.Column="0" Grid.Row="0"/>
+            <ComboBox Grid.Column="0" Grid.Row="1" SelectedItem="{Binding Path=Hdd.NameHDD, UpdateSourceTrigger=PropertyChanged}" Loaded="hddbox_OnLoaded"/>
+
+            <TextBlock Text="Объём, Gb:" Grid.Column="1" Grid.Row="0"/>
+            <TextBox Text="{Binding Path=HddCapacity}" Grid.Column="1" Grid.Row="1"></TextBox>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Объём ОЗУ, Gb" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Text="{Binding Path=RamCapacity}" Grid.Row="1" Grid.Column="0"/>
+
+            <TextBlock Text="ОС:" Grid.Row="0" Grid.Column="1"/>
+            <ComboBox Grid.Column="1" Grid.Row="1" SelectedItem="{Binding Path=OS.NameOS, UpdateSourceTrigger=PropertyChanged}" Loaded="osbox_OnLoaded"/>
+
+            <TextBlock Text="Лицензия ОС:" Grid.Column="2"/>
+            <ComboBox Grid.Row="1" Grid.Column="2" SelectedItem="{Binding Path = License.LicenseState, UpdateSourceTrigger=PropertyChanged}" Loaded="licensebox_OnLoaded"/>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Имя хоста:"/>
+            <TextBox Grid.Row="1" Text="{Binding Path=Hostname, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="IP - адрес" Grid.Column="1"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=IpAddress, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Работник:" />
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=WorkerName, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Кабинет:" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=Room, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Используется:" Grid.Row="0" Grid.Column="2"/>
+            <CheckBox Grid.Row="1" Grid.Column="2" IsChecked="{Binding Path = InUse, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Год поступления" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=YearUsingSince, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Инвентарный №" Grid.Column="0"></TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=InventoryNo, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+        <TextBlock Text="Примечание:"/>
+        <TextBox Height="40" Text="{Binding Path=Note, UpdateSourceTrigger=PropertyChanged}"/>
+    </StackPanel>
+
+
+    <StackPanel x:Key="VTNetworkDeviceFieldSet">            <!--Набор контролов для ввода данных по сетевому устр-ву-->
+        <TextBlock Text="Наименование сетевого устройства:"></TextBlock>
+        <ComboBox SelectedItem="{Binding Path = NetworkDevice.NameNetworkDevice, UpdateSourceTrigger=PropertyChanged}" Loaded="networkdevicebox_OnLoad"/>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Используется:" Grid.Row="0" Grid.Column="2"/>
+            <CheckBox Grid.Row="1" Grid.Column="2" IsChecked="{Binding Path = InUse , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Год поступления" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=YearUsingSince , UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Инвентарный №" Grid.Column="0"></TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=InventoryNo , UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+
+
+        <TextBlock Text="Серийный номер:"/>
+        <TextBox  Text="{Binding Path=SerialNumber , UpdateSourceTrigger=PropertyChanged}" Width="180" HorizontalAlignment="Left"/>
+
+        <TextBlock Text="IP - адрес:"/>
+        <TextBox  Text="{Binding Path=Ip , UpdateSourceTrigger=PropertyChanged}" Width="180" HorizontalAlignment="Left"/>
+
+        <TextBlock Text="Кабинет:"/>
+        <TextBox Text="{Binding Path=Room , UpdateSourceTrigger=PropertyChanged}" Width="100" HorizontalAlignment="Left"/>
+        <TextBlock Text="Примечание:"/>
+        <TextBox Height="50" Text="{Binding Path=Note , UpdateSourceTrigger=PropertyChanged}"/>
+    </StackPanel>
+
+    <StackPanel x:Key="VTPrinterFieldSet">                  <!--Набор контролов для ввода данных по принтеру-->
+       <TextBlock Text="Наименование принтера:"></TextBlock>
+        <ComboBox SelectedItem="{Binding Path = Printer.NamePrinter , UpdateSourceTrigger=PropertyChanged}" Loaded="printerbox_OnLoaded"/>
+
+       <Grid>
+           <Grid.RowDefinitions>
+               <RowDefinition/>
+               <RowDefinition/>
+           </Grid.RowDefinitions>
+           <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="2*"/>
+               <ColumnDefinition Width="*"/>
+               <ColumnDefinition Width="*"/>
+           </Grid.ColumnDefinitions>
+
+           <TextBlock Text="Используется:" Grid.Row="0" Grid.Column="2"/>
+            <CheckBox Grid.Row="1" Grid.Column="2" IsChecked="{Binding Path = InUse , UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+           <TextBlock Text="Год поступления" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=YearUsingSince , UpdateSourceTrigger=PropertyChanged}"/>
+
+           <TextBlock Text="Инвентарный №" Grid.Column="0"></TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=InventoryNo, UpdateSourceTrigger=PropertyChanged}" />
+       </Grid>
+
+
+       <TextBlock Text="Серийный номер:"/>
+        <TextBox  Text="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}" Width="180" HorizontalAlignment="Left"/>
+
+       <TextBlock Text="IP - адрес:"/>
+        <TextBox  Text="{Binding Path=Ip, UpdateSourceTrigger=PropertyChanged}" Width="180" HorizontalAlignment="Left"/>
+
+       <TextBlock Text="Кабинет:"/>
+        <TextBox Text="{Binding Path=Room, UpdateSourceTrigger=PropertyChanged}" Width="100" HorizontalAlignment="Left"/>
+       <TextBlock Text="Примечание:"/>
+        <TextBox Height="50" Text="{Binding Path=Note, UpdateSourceTrigger=PropertyChanged}"/>
+   </StackPanel>
+
+    <StackPanel x:Key="VTUPSFieldSet">                      <!--Набор контролов для ввода данных по ИБП-->
+       <TextBlock Text="Наименование ИБП:"></TextBlock>
+        <ComboBox SelectedItem="{Binding Path = UPS.NameUPS, UpdateSourceTrigger=PropertyChanged}" Loaded="upsbox_OnLoaded"/>
+
+        <Grid>
+           <Grid.RowDefinitions>
+               <RowDefinition/>
+               <RowDefinition/>
+           </Grid.RowDefinitions>
+           <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="2*"/>
+               <ColumnDefinition Width="*"/>
+               <ColumnDefinition Width="*"/>
+           </Grid.ColumnDefinitions>
+
+           <TextBlock Text="Используется:" Grid.Row="0" Grid.Column="2"/>
+            <CheckBox Grid.Row="1" Grid.Column="2" IsChecked="{Binding Path = InUse, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+
+           <TextBlock Text="Год поступления" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=YearUsingSince, UpdateSourceTrigger=PropertyChanged}"/>
+
+           <TextBlock Text="Инвентарный №" Grid.Column="0"></TextBlock>
+            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Path=InventoryNo, UpdateSourceTrigger=PropertyChanged}" />
+       </Grid>
+
+
+       <TextBlock Text="Серийный номер:"/>
+        <TextBox  Text="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}" Width="180" HorizontalAlignment="Left"/>
+
+       <TextBlock Text="Кабинет:"/>
+        <TextBox Text="{Binding Path=Room, UpdateSourceTrigger=PropertyChanged}" Width="100" HorizontalAlignment="Left"/>
+       <TextBlock Text="Примечание:"/>
+        <TextBox Height="50" Text="{Binding Path=Note, UpdateSourceTrigger=PropertyChanged}"/>
+   </StackPanel>
+
+
+
+
+
+
+</ResourceDictionary>
