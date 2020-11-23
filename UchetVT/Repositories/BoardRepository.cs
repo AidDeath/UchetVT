@@ -41,8 +41,8 @@ namespace UchetVT
         {
             DatabaseUtility.Exec("INSERT INTO BookBoard ( Motherboard, YearOut) VALUES (@Motherboard, @YearOut)", new List<SqlParameter>()
             {
-                new SqlParameter("@Motherboard", model.Motherboard),
-                new SqlParameter("@YearOut", model.YearOut)
+                new SqlParameter("@Motherboard",(object)model.Motherboard ?? DBNull.Value),
+                new SqlParameter("@YearOut", (object)model.YearOut ?? DBNull.Value)
             });
         }
 
@@ -51,8 +51,8 @@ namespace UchetVT
             DatabaseUtility.Exec("UPDATE BookBoard SET  Motherboard = @Motherboard , YearOut = @YearOut  WHERE Id = @Id", new List<SqlParameter>()
             {
                 new SqlParameter("@Id", model.Id),
-                new SqlParameter("@Motherboard", model.Motherboard),
-                new SqlParameter("@YearOut", model.YearOut)
+                new SqlParameter("@Motherboard", (object)model.Motherboard ?? DBNull.Value),
+                new SqlParameter("@YearOut", (object)model.YearOut ?? DBNull.Value)
             });
         }
 

@@ -45,10 +45,12 @@ namespace UchetVT
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(CurrentUser.AccessToBook)) this.NRIButton.Visibility = Visibility.Hidden;
-            this.Title += " --" + CurrentUser.Name;
+                else System.Windows.Application.Current.Properties.Add("AccessToBook", CurrentUser.AccessToBook);
+
             System.Windows.Application.Current.Properties.Add("AccessToRegion", CurrentUser.AccessToRegion);
 
-            }
+            this.Title += " -- " + CurrentUser.Name;
+        }
 
 
         private void NRIButton_OnClick(object sender, RoutedEventArgs e)

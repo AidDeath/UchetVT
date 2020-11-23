@@ -15,7 +15,7 @@ namespace UchetVT
         public ObservableCollection<Book> GetAll()
         {
             ObservableCollection<Book> books = new ObservableCollection<Book>();
-            DataTable bookTable = DatabaseUtility.GetTable("SELECT * FROM BookBooks");
+            DataTable bookTable = DatabaseUtility.GetTable("SELECT * FROM BookBooks WHERE Id IN(" + System.Windows.Application.Current.Properties["AccessToBook"].ToString() + ")");
             foreach (DataRow row in bookTable.Rows)
             {
                 books.Add(new Book()

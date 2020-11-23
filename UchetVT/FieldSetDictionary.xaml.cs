@@ -101,10 +101,10 @@ namespace UchetVT
         private void EditAccess(object sender, RoutedEventArgs e)
         {
 
-            var accessAssignWnd = new AccessAssignWindow();
+            var accessAssignWnd = new AccessEditWindow();
 
-            foreach (Window window in System.Windows.Application.Current.Windows) if (window is AccessAssignWindow) accessAssignWnd.Owner = window;
-            accessAssignWnd.WorkWith = AccessAssignWindow.WorkWithVariants.Region;
+            foreach (Window window in System.Windows.Application.Current.Windows) if (window is AccessEditWindow) accessAssignWnd.Owner = window;
+            accessAssignWnd.WorkWith = AccessEditWindow.WorkWithVariants.Region;
 
             accessAssignWnd.ShowDialog();
             
@@ -112,24 +112,29 @@ namespace UchetVT
 
         private void RegionAccessChange(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show((string) ((Button) sender).Content); //Тут норм
-            var accessAssignWnd = new AccessAssignWindow
+            var accessEditWnd = new AccessEditWindow()
             {
-                AccessString = (string)((Button)sender).Content,     // А тут, скотина, не принимает
-                WorkWith = AccessAssignWindow.WorkWithVariants.Region
+                AccessString = (string)((Button)sender).Content,     
+                WorkWith = AccessEditWindow.WorkWithVariants.Region
             };
+            foreach (Window window in System.Windows.Application.Current.Windows) if (window is RecordWindow) accessEditWnd.Owner = window;
 
-            accessAssignWnd.ShowDialog();
+            accessEditWnd.ShowDialog();
+            ((Button) sender).Content = accessEditWnd.AccessString;
         }
 
 
         private void BookAccessChange(object sender, RoutedEventArgs e)
         {
-            var accessAssignWnd = new AccessAssignWindow();
-            accessAssignWnd.AccessString = (string)((Button)sender).Content;
-            accessAssignWnd.WorkWith = AccessAssignWindow.WorkWithVariants.Book;
+            var accessEditWnd = new AccessEditWindow()
+            {
+                AccessString = (string)((Button)sender).Content,
+                WorkWith = AccessEditWindow.WorkWithVariants.Book
+            };
+            foreach (Window window in System.Windows.Application.Current.Windows) if (window is RecordWindow) accessEditWnd.Owner = window;
 
-
+            accessEditWnd.ShowDialog();
+            ((Button)sender).Content = accessEditWnd.AccessString;
         }
     }
 }

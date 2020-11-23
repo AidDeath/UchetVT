@@ -48,7 +48,15 @@ namespace UchetVT
 
         public void Update(User model)
         {
-            throw new NotImplementedException();
+            DatabaseUtility.Exec("UPDATE BookUsers SET Name=@Name, Position=@Position, UserName=@UserName, AccessToRegion=@AccessToRegion, AccessToBook=@AccessToBook WHERE Id=@Id", new List<SqlParameter>
+            {
+                new SqlParameter("@Id", model.Id),
+                new SqlParameter("@Name", (object)model.Name ?? DBNull.Value),
+                new SqlParameter("@Position", (object)model.Position ?? DBNull.Value),
+                //new SqlParameter("@UserName", (object)model.UserName ?? DBNull.Value),
+                new SqlParameter("@AccessToRegion", model.AccessToRegion),
+                new SqlParameter("@AccessToBook", model.AccessToBook),
+            });
         }
 
         public void Delete(User model)
