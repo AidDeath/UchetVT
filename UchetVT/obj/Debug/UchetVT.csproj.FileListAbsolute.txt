@@ -61,7 +61,9 @@ C:\Users\aidde\source\repos\UchetVT\UchetVT\obj\Debug\UchetVT.g.resources
 C:\Users\aidde\source\repos\UchetVT\UchetVT\obj\Debug\UchetVT.Properties.Resources.resources
 C:\Users\aidde\source\repos\UchetVT\UchetVT\obj\Debug\UchetVT.csproj.GenerateResource.cache
 C:\Users\aidde\source\repos\UchetVT\UchetVT\obj\Debug\UchetVT.csproj.CoreCompileInputs.cache
-C:\Users\aidde\source\repos\UchetVT\UchetVT\obj\Debug\AccessAssignWindow.g.cs
-C:\Users\aidde\source\repos\UchetVT\UchetVT\obj\Debug\AccessAssignWindow.baml
 C:\Users\F506-U001\source\repos\UchetVT\UchetVT\obj\Debug\AccessEditWindow.g.cs
 C:\Users\F506-U001\source\repos\UchetVT\UchetVT\obj\Debug\AccessEditWindow.baml
+C:\Users\aidde\source\repos\UchetVT\UchetVT\obj\Debug\AccessEditWindow.g.cs
+C:\Users\aidde\source\repos\UchetVT\UchetVT\obj\Debug\AccessEditWindow.baml
+C:\Users\aidde\source\repos\UchetVT\UchetVT\obj\Debug\PasswordWindow.g.cs
+C:\Users\aidde\source\repos\UchetVT\UchetVT\obj\Debug\PasswordWindow.baml

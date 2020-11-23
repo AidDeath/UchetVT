@@ -9,6 +9,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 
 namespace UchetVT
 {
@@ -56,7 +57,24 @@ namespace UchetVT
 
         public void Set(User model)
         {
-            throw new NotImplementedException();
+            PasswordWindow pwdWindow = new PasswordWindow();
+            foreach (Window window in System.Windows.Application.Current.Windows) if (window is RecordWindow) pwdWindow.Owner = window;
+
+            if (pwdWindow.ShowDialog() == true)
+            {
+                model.UserPassword = pwdWindow.Password;
+
+                DatabaseUtility.ExecStorageProc("sp_CreateUser", new List<SqlParameter>
+                {
+                    new SqlParameter("@Name", model.Name),
+                    new SqlParameter("@Position", model.Position),
+                    new SqlParameter("@UserName", model.UserName),
+                    new SqlParameter("@Password", model.UserPassword),
+                    new SqlParameter("@AccessToRegion", model.AccessToRegion),
+                    new SqlParameter("@AccessToBook", model.AccessToBook)
+
+                });
+            }
         }
 
         public void Update(User model)
@@ -74,13 +92,13 @@ namespace UchetVT
             });
                 if (dbUserData.AccessToBook.Equals(model.AccessToBook) ||
                     (dbUserData.AccessToRegion.Equals(model.AccessToRegion)))
-                    MessageBox.Show("Права будут применены при следующем входе");
+                    MessageBox.Show("Права доступа будут применены \nпри следующем входе");
             }
             else
             {
                 if (dbUserData.Id.ToString() == Application.Current.Properties["CurrentUserId"].ToString())
                 {
-                    MessageBox.Show("Недопустимо изменение собственного имени входа.");
+                    MessageBox.Show("Недопустимо изменение собственного имени входа","Внимание!", MessageBoxButton.OK,MessageBoxImage.Warning);
                     return;
                 }
                 if (MessageBox.Show("Пользователь будет пересоздан. \nУдалить старый логин?",
@@ -93,6 +111,13 @@ namespace UchetVT
 
         public void Delete(User model)
         {
+            if (model.Id.ToString() == Application.Current.Properties["CurrentUserId"].ToString())
+            {
+                MessageBox.Show("Нельзя удалить собственное имя пользователя во время сесссии",
+                    "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             if (MessageBox.Show("Удалить пользователя " + model.UserName+ " ?",
                     "Удаление пользователя", MessageBoxButton.YesNo,
                     MessageBoxImage.Question,MessageBoxResult.No) == MessageBoxResult.Yes ) DatabaseUtility.Exec("DELETE FROM BookUsers WHERE Id = @Id",

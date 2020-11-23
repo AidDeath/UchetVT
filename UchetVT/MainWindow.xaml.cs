@@ -298,9 +298,8 @@ namespace UchetVT
 
                 case "UchetVT.User":
                 {
-                    //DB.Users.Delete((User)MainListView.SelectedItem);
-                    //MainListView.ItemsSource = DB.Users.GetAll();
-                    MessageBox.Show("Удаление пользователей ещё не реализовано!");
+                    DB.Users.Delete((User)MainListView.SelectedItem);
+                    MainListView.ItemsSource = DB.Users.GetAll();
                     break;
                 }
 

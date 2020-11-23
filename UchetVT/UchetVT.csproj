@@ -81,6 +81,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RecordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +106,9 @@
     </Compile>
     <Compile Include="FieldSetDictionary.xaml.cs">
       <DependentUpon>FieldSetDictionary.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordWindow.xaml.cs">
+      <DependentUpon>PasswordWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="RecordWindow.xaml.cs">
       <DependentUpon>RecordWindow.xaml</DependentUpon>
