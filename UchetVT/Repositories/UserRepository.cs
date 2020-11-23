@@ -37,8 +37,21 @@ namespace UchetVT
 
 
         public User Get(int id)
-        {
-            throw new NotImplementedException();
+        { 
+            DataTable userTable = DatabaseUtility.GetTable("SELECT * FROM BookUsers WHERE Id=@Id", new List<SqlParameter>
+            {
+                new SqlParameter("@Id", id)
+            });
+
+            return new User
+            {
+                Id = userTable.Rows[0].Field<int>("Id"),
+                Name = userTable.Rows[0].Field<string>("Name"),
+                Position = userTable.Rows[0].Field<string>("Position"),
+                UserName = userTable.Rows[0].Field<string>("UserName"),
+                AccessToRegion = userTable.Rows[0].Field<string>("AccessToRegion"),
+                AccessToBook = userTable.Rows[0].Field<string>("AccessToBook"),
+            };
         }
 
         public void Set(User model)
@@ -48,7 +61,9 @@ namespace UchetVT
 
         public void Update(User model)
         {
-            DatabaseUtility.Exec("UPDATE BookUsers SET Name=@Name, Position=@Position, UserName=@UserName, AccessToRegion=@AccessToRegion, AccessToBook=@AccessToBook WHERE Id=@Id", new List<SqlParameter>
+            User dbUserData = Get(model.Id);
+
+            if (dbUserData.UserName == model.UserName) {DatabaseUtility.Exec("UPDATE BookUsers SET Name=@Name, Position=@Position, AccessToRegion=@AccessToRegion, AccessToBook=@AccessToBook WHERE Id=@Id", new List<SqlParameter>
             {
                 new SqlParameter("@Id", model.Id),
                 new SqlParameter("@Name", (object)model.Name ?? DBNull.Value),
@@ -57,11 +72,30 @@ namespace UchetVT
                 new SqlParameter("@AccessToRegion", model.AccessToRegion),
                 new SqlParameter("@AccessToBook", model.AccessToBook),
             });
+                if (dbUserData.AccessToBook.Equals(model.AccessToBook) ||
+                    (dbUserData.AccessToRegion.Equals(model.AccessToRegion)))
+                    MessageBox.Show("Права будут применены при следующем входе");
+            }
+            else
+            {
+                if (dbUserData.Id.ToString() == Application.Current.Properties["CurrentUserId"].ToString())
+                {
+                    MessageBox.Show("Недопустимо изменение собственного имени входа.");
+                    return;
+                }
+                if (MessageBox.Show("Пользователь будет пересоздан. \nУдалить старый логин?",
+                        "Пересоздание пользователя",
+                        MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) ==
+                    MessageBoxResult.Yes) Delete(model);        // Удаляем старого пользователя
+                    Set(model);     // создаём нового пользователя   TODO:  ОСТАНОВИЛСЯ ЗДЕСЬ!
+            }
         }
 
         public void Delete(User model)
         {
-            DatabaseUtility.Exec("DELETE FROM BookUsers WHERE Id = @Id",
+            if (MessageBox.Show("Удалить пользователя " + model.UserName+ " ?",
+                    "Удаление пользователя", MessageBoxButton.YesNo,
+                    MessageBoxImage.Question,MessageBoxResult.No) == MessageBoxResult.Yes ) DatabaseUtility.Exec("DELETE FROM BookUsers WHERE Id = @Id",
                 new List<SqlParameter>()
                 {
                     new SqlParameter("@Id", model.Id)

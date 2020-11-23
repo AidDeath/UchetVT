@@ -72,6 +72,7 @@ namespace UchetVT
                 main.CurrentUser.AccessToBook = extUserDataTable.Rows[0].Field<string>("AccessToBook");
                 main.CurrentUser.Name = extUserDataTable.Rows[0].Field<string>("Name");
 
+                System.Windows.Application.Current.Properties.Add("CurrentUserId", main.CurrentUser.Id);
 
                 this.Close();
                 main.Show();
