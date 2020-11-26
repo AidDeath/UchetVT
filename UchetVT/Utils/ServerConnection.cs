@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Windows;
-
-namespace UchetVT
+﻿namespace UchetVT
 {
-   public class ServerConnection
-   {
-       public string ConnectionString;
-       public  void ConnectToServer(User user)
+    public class ServerConnection
+    {
+        public string ConnectionString;
+        public void ConnectToServer(User user)
         {
-            ConnectionString = 
+            ConnectionString =
                 $"Data Source = {Properties.Settings.Default.ServerHostname}\\{Properties.Settings.Default.SQLInstance};" +
                 $" Persist Security Info = True; " +
                 $"Password = {user.UserPassword};" +
@@ -22,7 +15,7 @@ namespace UchetVT
 
         }
 
- 
+
 
 
     }

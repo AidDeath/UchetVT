@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace UchetVT
 {
@@ -151,7 +148,7 @@ namespace UchetVT
         /// <returns>Объект с данными</returns>
         public static DataTable GetTable(string query)
         {
-            using  (SqlConnection Connection = new SqlConnection(connectionstring))
+            using (SqlConnection Connection = new SqlConnection(connectionstring))
             {
                 try
                 {
@@ -188,7 +185,7 @@ namespace UchetVT
                 {
                     Connection.Open();
 
-                    SqlCommand Command = new SqlCommand(query,  Connection);
+                    SqlCommand Command = new SqlCommand(query, Connection);
 
                     Command.CommandType = CommandType.Text;
                     return Command.ExecuteReader();
@@ -222,7 +219,7 @@ namespace UchetVT
                         Command.Parameters.AddRange(parameters.ToArray());
                     }
 
-                    
+
                     return Command.ExecuteReader();
                 }
                 catch (SqlException ex)
@@ -312,7 +309,7 @@ namespace UchetVT
                     Connection.Open();
 
                     SqlCommand Command = new SqlCommand(query, Connection);
-                    
+
                     if (parameters != null)
                     {
                         Command.Parameters.AddRange(parameters.ToArray());
@@ -376,7 +373,7 @@ namespace UchetVT
 
                     SqlCommand Command = new SqlCommand(storageproc, Connection);
                     Command.CommandType = System.Data.CommandType.StoredProcedure;
-                    
+
                     if (parameters != null)
                     {
                         Command.Parameters.AddRange(parameters.ToArray());

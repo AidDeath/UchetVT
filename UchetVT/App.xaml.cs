@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Windows;
-
-namespace UchetVT
+﻿namespace UchetVT
 {
     /// <summary>
     /// Interaction logic for App.xaml

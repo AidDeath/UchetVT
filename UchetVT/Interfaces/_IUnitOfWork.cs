@@ -3,7 +3,7 @@
 /// Интерфейс для класса инициализации репозиториев
 /// </summary>
     public interface IUnitOfWork
-    { 
+    {
         IRepository<Board> Boards { get; }
         IRepository<Book> Books { get; }
         IRepository<CPU> CPUs { get; }

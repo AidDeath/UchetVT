@@ -3,32 +3,29 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace UchetVT
 {
-   public  class BoardRepository : IRepository<Board>
+    public class BoardRepository : IRepository<Board>
     {
         public ObservableCollection<Board> GetAll()
         {
-           ObservableCollection<Board> boards = new ObservableCollection<Board>();
-           DataTable boardsTable = DatabaseUtility.GetTable("SELECT * FROM BookBoard");
-           foreach ( DataRow row in boardsTable.Rows)
-           {
-               boards.Add(new Board()
-               {
-                   Id = row.Field<int>("Id"),
-                   Motherboard = row.Field<string>("Motherboard"),
-                   YearOut = row.Field<int?>("YearOut")
-               });
-           }
+            ObservableCollection<Board> boards = new ObservableCollection<Board>();
+            DataTable boardsTable = DatabaseUtility.GetTable("SELECT * FROM BookBoard");
+            foreach (DataRow row in boardsTable.Rows)
+            {
+                boards.Add(new Board()
+                {
+                    Id = row.Field<int>("Id"),
+                    Motherboard = row.Field<string>("Motherboard"),
+                    YearOut = row.Field<int?>("YearOut")
+                });
+            }
 
-           return boards;
+            return boards;
         }
 
 

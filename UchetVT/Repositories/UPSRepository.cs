@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -17,18 +15,18 @@ namespace UchetVT
 
         public ObservableCollection<UPS> GetAll()
         {
-           ObservableCollection<UPS> upses = new ObservableCollection<UPS>();
-           DataTable upsesTable = DatabaseUtility.GetTable("SELECT * FROM BookUPS");
-           foreach (DataRow row in upsesTable.Rows)
-           {
-               upses.Add(new UPS()
-               {
-                   Id = row.Field<int>("Id"),
-                   NameUPS = row.Field<string>("NameUPS")
-               });
-           }
+            ObservableCollection<UPS> upses = new ObservableCollection<UPS>();
+            DataTable upsesTable = DatabaseUtility.GetTable("SELECT * FROM BookUPS");
+            foreach (DataRow row in upsesTable.Rows)
+            {
+                upses.Add(new UPS()
+                {
+                    Id = row.Field<int>("Id"),
+                    NameUPS = row.Field<string>("NameUPS")
+                });
+            }
 
-           return upses;
+            return upses;
         }
 
 

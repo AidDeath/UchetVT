@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace UchetVT
 {
-   public  class CPURepository : IRepository<CPU>
+    public class CPURepository : IRepository<CPU>
     {
         public ObservableCollection<CPU> GetAll()
         {

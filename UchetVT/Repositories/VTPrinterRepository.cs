@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace UchetVT
 {
-    class VTPrinterRepository :IVtRepository<VTPrinter>
+    class VTPrinterRepository : IVtRepository<VTPrinter>
     {
         public ObservableCollection<VTPrinter> GetAll(int regionId)
         {
@@ -27,7 +25,7 @@ namespace UchetVT
                     PrinterId = row.Field<int>("PrinterId"),
                     Printer = new Printer()
                     {
-                        Id = row.Field<int>("PrinterId"), 
+                        Id = row.Field<int>("PrinterId"),
                         NamePrinter = row.Field<string>("NamePrinter"),
                         MonoColor = row.Field<bool>("MonoColor"),
                         MFU = row.Field<bool>("MFU"),
@@ -106,7 +104,7 @@ namespace UchetVT
             GridView gridView = new GridView();
             gridView.Columns.Add(new GridViewColumn() { Header = "Ид", DisplayMemberBinding = new Binding() { Path = new PropertyPath("Id") } });
             gridView.Columns.Add(new GridViewColumn() { Header = "Наименование принтера", DisplayMemberBinding = new Binding() { Path = new PropertyPath("Printer.NamePrinter") } });
-           
+
             DataTemplate inUseTemplate = new DataTemplate();
             FrameworkElementFactory inUseFactory = new FrameworkElementFactory(typeof(CheckBox));
             inUseFactory.SetValue(CheckBox.IsEnabledProperty, false);
@@ -121,7 +119,7 @@ namespace UchetVT
             gridView.Columns.Add(new GridViewColumn() { Header = "IP адрес", DisplayMemberBinding = new Binding() { Path = new PropertyPath("Ip") } });
             gridView.Columns.Add(new GridViewColumn() { Header = "Кабинет", DisplayMemberBinding = new Binding() { Path = new PropertyPath("Room") } });
             gridView.Columns.Add(new GridViewColumn() { Header = "Примечание", DisplayMemberBinding = new Binding() { Path = new PropertyPath("Note") } });
-            
+
             DataTemplate mfuTemplate = new DataTemplate();
             FrameworkElementFactory mfuFactory = new FrameworkElementFactory(typeof(CheckBox));
             mfuFactory.SetValue(CheckBox.IsEnabledProperty, false);

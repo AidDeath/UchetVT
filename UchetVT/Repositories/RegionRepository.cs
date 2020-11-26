@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,7 +14,7 @@ namespace UchetVT
         public ObservableCollection<Region> GetAll()
         {
             ObservableCollection<Region> regions = new ObservableCollection<Region>();
-            DataTable regionTable = DatabaseUtility.GetTable("SELECT * FROM BookRegion WHERE Id IN("+ System.Windows.Application.Current.Properties["AccessToRegion"].ToString()+")");
+            DataTable regionTable = DatabaseUtility.GetTable("SELECT * FROM BookRegion WHERE Id IN(" + System.Windows.Application.Current.Properties["AccessToRegion"].ToString() + ")");
             foreach (DataRow row in regionTable.Rows)
             {
                 regions.Add(new Region()

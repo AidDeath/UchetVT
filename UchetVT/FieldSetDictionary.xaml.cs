@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Interop;
 
 namespace UchetVT
 {
@@ -20,13 +15,13 @@ namespace UchetVT
         private void boardbox_OnLoaded(object sender, RoutedEventArgs e)
         {
             //ComboBox boardCombo = (ComboBox)sender;
-           // var boards = DB.Boards.GetAll();
-           // var boardsNames = boards.Select(b => b.Motherboard);
+            // var boards = DB.Boards.GetAll();
+            // var boardsNames = boards.Select(b => b.Motherboard);
 
             // boardCombo.ItemsSource = boardsNames;
             //boardCombo.ItemsSource = boards;
 
-            ((ComboBox) sender).ItemsSource = DB.Boards.GetAll().Select(b => b.Motherboard);
+            ((ComboBox)sender).ItemsSource = DB.Boards.GetAll().Select(b => b.Motherboard);
         }
 
         private void cpubox_OnLoaded(object sender, RoutedEventArgs e)
@@ -70,7 +65,7 @@ namespace UchetVT
 
         private void networkdevicebox_OnLoad(object sender, RoutedEventArgs e)
         {
-            ComboBox netDevCombo = (ComboBox) sender;
+            ComboBox netDevCombo = (ComboBox)sender;
 
             var netdevs = DB.NetworkDevices.GetAll();
             var netdevNames = netdevs.Select(n => n.NameNetworkDevice);
@@ -107,20 +102,20 @@ namespace UchetVT
             accessAssignWnd.WorkWith = AccessEditWindow.WorkWithVariants.Region;
 
             accessAssignWnd.ShowDialog();
-            
+
         }
 
         private void RegionAccessChange(object sender, RoutedEventArgs e)
         {
             var accessEditWnd = new AccessEditWindow()
             {
-                AccessString = (string)((Button)sender).Content,     
+                AccessString = (string)((Button)sender).Content,
                 WorkWith = AccessEditWindow.WorkWithVariants.Region
             };
             foreach (Window window in System.Windows.Application.Current.Windows) if (window is RecordWindow) accessEditWnd.Owner = window;
 
             accessEditWnd.ShowDialog();
-            ((Button) sender).Content = accessEditWnd.AccessString;
+            ((Button)sender).Content = accessEditWnd.AccessString;
         }
 
 

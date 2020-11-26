@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace UchetVT
 {
@@ -33,63 +26,63 @@ namespace UchetVT
         public AccessEditWindow()
         {
             InitializeComponent();
-           // IUnitOfWork DB = new UnitOfWork();
+            // IUnitOfWork DB = new UnitOfWork();
         }
 
         private void AccessEditWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
-            
+
 
             var gridView = new GridView();
             gridView.Columns.Add(new GridViewColumn
-                { Header = "Ид", DisplayMemberBinding = new Binding() { Path = new PropertyPath("Id") } });
+            { Header = "Ид", DisplayMemberBinding = new Binding() { Path = new PropertyPath("Id") } });
 
             switch (WorkWith)
             {
                 case WorkWithVariants.Region:   // Выбор данных для региона
-                {
-                    gridView.Columns.Add(new GridViewColumn
+                    {
+                        gridView.Columns.Add(new GridViewColumn
                         { Header = "Город", DisplayMemberBinding = new Binding() { Path = new PropertyPath("NameCity") } });
 
-                    string[] regionsAccessArray = AccessString.Split(new char[] {','});
+                        string[] regionsAccessArray = AccessString.Split(new char[] { ',' });
 
-                    foreach (var region in DB.Regions.GetAll())
-                    {
-                        AccessCollection.Add(new AccessData()
+                        foreach (var region in DB.Regions.GetAll())
                         {
-                            Id = region.Id,
-                            NameCity = region.NameCity,
-                            Access = regionsAccessArray.Any(r => r == region.Id.ToString())
-                        });
+                            AccessCollection.Add(new AccessData()
+                            {
+                                Id = region.Id,
+                                NameCity = region.NameCity,
+                                Access = regionsAccessArray.Any(r => r == region.Id.ToString())
+                            });
+                        }
+                        AccessEditView.ItemsSource = AccessCollection;
+                        break;
                     }
-                    AccessEditView.ItemsSource = AccessCollection;
-                    break;
-                }
 
                 case WorkWithVariants.Book: // Выбор данных для справочника
-                {
-                    gridView.Columns.Add(new GridViewColumn
+                    {
+                        gridView.Columns.Add(new GridViewColumn
                         { Header = "Справочник", DisplayMemberBinding = new Binding() { Path = new PropertyPath("NameBook") } });
 
-                    string[] bookAccessArray = AccessString.Split(',');
+                        string[] bookAccessArray = AccessString.Split(',');
 
-                    foreach (var book in DB.Books.GetAll())
-                    {
-                        AccessCollection.Add(new AccessData()
+                        foreach (var book in DB.Books.GetAll())
                         {
-                            Id = book.Id,
-                            NameBook = book.NameBook,
-                            Access = bookAccessArray.Any(r => r == book.Id.ToString())
-                        });
-                    }
-                    AccessEditView.ItemsSource = AccessCollection;
-                    break;
+                            AccessCollection.Add(new AccessData()
+                            {
+                                Id = book.Id,
+                                NameBook = book.NameBook,
+                                Access = bookAccessArray.Any(r => r == book.Id.ToString())
+                            });
+                        }
+                        AccessEditView.ItemsSource = AccessCollection;
+                        break;
                     }
             }
 
             DataTemplate dataTemplate = new DataTemplate();
             FrameworkElementFactory elementFactory = new FrameworkElementFactory(typeof(CheckBox));
-            elementFactory.SetBinding(CheckBox.IsCheckedProperty, new Binding() { Path = new PropertyPath("Access"), UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged});
+            elementFactory.SetBinding(CheckBox.IsCheckedProperty, new Binding() { Path = new PropertyPath("Access"), UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
             dataTemplate.VisualTree = elementFactory;
             gridView.Columns.Add(new GridViewColumn { Header = "Доступ", CellTemplate = dataTemplate });
 
@@ -98,9 +91,14 @@ namespace UchetVT
 
         private void AccessEditWindow_OnClosing(object sender, CancelEventArgs e)
         {
-         var resultArray = AccessCollection.Where(c => c.Access == true).Select(c => c.Id.ToString()).ToArray();
-         
-         AccessString = string.Join(",", resultArray);
+            var resultArray = AccessCollection.Where(c => c.Access == true).Select(c => c.Id.ToString()).ToArray();
+
+            AccessString = string.Join(",", resultArray);
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 

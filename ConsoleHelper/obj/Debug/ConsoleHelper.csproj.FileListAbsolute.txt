@@ -1,0 +1,11 @@
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\obj\Debug\ConsoleHelper.csprojAssemblyReference.cache
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\obj\Debug\ConsoleHelper.csproj.CoreCompileInputs.cache
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\bin\Debug\ConsoleHelper.exe.config
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\bin\Debug\ConsoleHelper.exe
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\bin\Debug\ConsoleHelper.pdb
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\bin\Debug\UchetVT.exe
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\bin\Debug\UchetVT.pdb
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\bin\Debug\UchetVT.exe.config
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\obj\Debug\ConsoleHelper.csproj.CopyComplete
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\obj\Debug\ConsoleHelper.exe
+C:\Users\aidde\source\repos\UchetVT\ConsoleHelper\obj\Debug\ConsoleHelper.pdb

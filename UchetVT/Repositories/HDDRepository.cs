@@ -65,7 +65,7 @@ namespace UchetVT
             gridView.Columns.Add(new GridViewColumn() { Header = "Ид", DisplayMemberBinding = new Binding() { Path = new PropertyPath("Id") } });
             gridView.Columns.Add(new GridViewColumn() { Header = "Модель жесткого диска", DisplayMemberBinding = new Binding() { Path = new PropertyPath("NameHDD") } });
 
-            return gridView; 
+            return gridView;
         }
     }
 }

@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace UchetVT
 {
-    class VTUPSRepository :IVtRepository<VTUPS>
+    class VTUPSRepository : IVtRepository<VTUPS>
     {
         public ObservableCollection<VTUPS> GetAll(int regionId)
         {

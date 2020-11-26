@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace UchetVT
 {
-    class VTComputerRepository :IVtRepository<VTComputer>
+    class VTComputerRepository : IVtRepository<VTComputer>
     {
         public ObservableCollection<VTComputer> GetAll(int regionId)
         {
             ObservableCollection<VTComputer> vtComputers = new ObservableCollection<VTComputer>();
-            DataTable computersTable = (regionId != 25)? 
-                DatabaseUtility.GetTable("SELECT * FROM v_GetComputers WHERE OwnerRegion IN ("+regionId+")") : 
+            DataTable computersTable = (regionId != 25) ?
+                DatabaseUtility.GetTable("SELECT * FROM v_GetComputers WHERE OwnerRegion IN (" + regionId + ")") :
                 DatabaseUtility.GetTable("SELECT * FROM v_GetComputers");
 
             foreach (DataRow row in computersTable.Rows)
@@ -62,7 +60,7 @@ namespace UchetVT
         }
 
         public void Set(VTComputer model)
-        {                                                         
+        {
             //MessageBox.Show(model.OwnerRegion.ToString());
             DatabaseUtility.Exec("INSERT INTO VTComputer (InUse, BoardId, CPUId, CPUClockSpeed, HddId, HddCapacity, RamCapacity, YearUsingSince," +
                                  "InventoryNo, HostName, Ip, WorkerName, Room, Note, OwnerRegion, DateEdit, OSId, LicenseStateId) VALUES (" +
@@ -140,7 +138,7 @@ namespace UchetVT
         public void Delete(VTComputer model)
         {
             DatabaseUtility.Exec("DELETE FROM VTComputer WHERE Id = @Id",
-                new List<SqlParameter>() {new SqlParameter("@Id", model.Id)});
+                new List<SqlParameter>() { new SqlParameter("@Id", model.Id) });
         }
 
         public GridView MakeView()
@@ -168,7 +166,7 @@ namespace UchetVT
             inUseFactory.SetValue(CheckBox.IsEnabledProperty, false);
             inUseFactory.SetBinding(CheckBox.IsCheckedProperty, new Binding() { Path = new PropertyPath("InUse") });
             inUseTemplate.VisualTree = inUseFactory;
-            gridView.Columns.Add(new GridViewColumn() { Header = "Используется", CellTemplate = inUseTemplate});
+            gridView.Columns.Add(new GridViewColumn() { Header = "Используется", CellTemplate = inUseTemplate });
 
 
 

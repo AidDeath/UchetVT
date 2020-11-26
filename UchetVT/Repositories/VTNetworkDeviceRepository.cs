@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace UchetVT
 {
-    class VTNetworkDeviceRepository :IVtRepository<VTNetworkDevice>
+    class VTNetworkDeviceRepository : IVtRepository<VTNetworkDevice>
     {
         public ObservableCollection<VTNetworkDevice> GetAll(int regionId)
         {
@@ -25,7 +23,7 @@ namespace UchetVT
                 {
                     Id = row.Field<int>("Id"),
                     DeviceId = row.Field<int>("DeviceId"),
-                    NetworkDevice = new NetworkDevice() { Id = row.Field<int>("DeviceId") , NameNetworkDevice = row.Field<string>("NameNetworkDevice")},
+                    NetworkDevice = new NetworkDevice() { Id = row.Field<int>("DeviceId"), NameNetworkDevice = row.Field<string>("NameNetworkDevice") },
                     // ниже общие поля для всех моделей VT
                     YearUsingSince = row.Field<int>("YearUsingSince"),
                     InventoryNo = row.Field<string>("InventoryNo"),
@@ -102,7 +100,7 @@ namespace UchetVT
             gridView.Columns.Add(new GridViewColumn() { Header = "Ид", DisplayMemberBinding = new Binding() { Path = new PropertyPath("Id") } });
             gridView.Columns.Add(new GridViewColumn() { Header = "Наименование устройства", DisplayMemberBinding = new Binding() { Path = new PropertyPath("NetworkDevice.NameNetworkDevice") } });
             gridView.Columns.Add(new GridViewColumn() { Header = "Серийный номер", DisplayMemberBinding = new Binding() { Path = new PropertyPath("SerialNumber") } });
-            
+
             // ниже общие поля для всех моделей VT
             gridView.Columns.Add(new GridViewColumn() { Header = "Год учёта", DisplayMemberBinding = new Binding() { Path = new PropertyPath("YearUsingSince") } });
             gridView.Columns.Add(new GridViewColumn() { Header = "Инвентарный №", DisplayMemberBinding = new Binding() { Path = new PropertyPath("InventoryNo") } });

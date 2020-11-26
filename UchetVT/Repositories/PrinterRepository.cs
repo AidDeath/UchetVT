@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -87,7 +84,7 @@ namespace UchetVT
             DataTemplate mfuTemplate = new DataTemplate();
             FrameworkElementFactory mfuFactory = new FrameworkElementFactory(typeof(CheckBox));
             mfuFactory.SetValue(CheckBox.IsEnabledProperty, false);
-            mfuFactory.SetBinding(CheckBox.IsCheckedProperty, new Binding(){Path = new PropertyPath("MFU")});
+            mfuFactory.SetBinding(CheckBox.IsCheckedProperty, new Binding() { Path = new PropertyPath("MFU") });
             mfuTemplate.VisualTree = mfuFactory;
 
             DataTemplate laserJetTemplate = new DataTemplate();
@@ -108,7 +105,7 @@ namespace UchetVT
             //gridView.Columns.Add(new GridViewColumn() { Header = "TEST", DisplayMemberBinding = new Binding() { Path = new PropertyPath("MFU") }, CellTemplate = template });
             //gridView.Columns.Add(new GridViewColumn() { Header = "TEST", DisplayMemberBinding = new Binding() { Path = new PropertyPath("MFU") }, CellTemplate = template });
 
-            gridView.Columns.Add(new GridViewColumn() { Header = "МФУ", CellTemplate = mfuTemplate});
+            gridView.Columns.Add(new GridViewColumn() { Header = "МФУ", CellTemplate = mfuTemplate });
             gridView.Columns.Add(new GridViewColumn() { Header = "Лазерный", CellTemplate = laserJetTemplate });
             gridView.Columns.Add(new GridViewColumn() { Header = "Монохромный", CellTemplate = monoColorTemplate });
 

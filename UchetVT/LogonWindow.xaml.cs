@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace UchetVT
 {
@@ -35,7 +24,7 @@ namespace UchetVT
                 UserName = this.UsernameTextBox.Text,
                 UserPassword = this.UserPasswordBox.Password
             };
-            
+
 
 
 
@@ -59,7 +48,7 @@ namespace UchetVT
 
                 //Получаем из БД информацию о пользователе
                 var extUserDataTable = DatabaseUtility.GetTable("SELECT TOP 1 * FROM dbo.fn_t_GetExtendedUserData()");
-                if (extUserDataTable.Rows.Count == 0)                  
+                if (extUserDataTable.Rows.Count == 0)
                 {
                     Exception ex = new Exception("У пользователя нет доступа к данным ни одного района");
                     throw ex;
@@ -82,28 +71,28 @@ namespace UchetVT
             {
                 switch (ex.Number)
                 {
-                    case 18456 :
-                    {
-                        MessageBox.Show("Неверное имя пользователя или пароль");
+                    case 18456:
+                        {
+                            MessageBox.Show("Неверное имя пользователя или пароль");
                             break;
-                    }
+                        }
 
                     case -1:
-                    {
-                        MessageBox.Show("Не удалось найти сервер MSSQL, указанный в настройках\nПроверьте сеть и файл app.config ");
-                        break;
-                    }
+                        {
+                            MessageBox.Show("Не удалось найти сервер MSSQL, указанный в настройках\nПроверьте сеть и файл app.config ");
+                            break;
+                        }
 
                     case 4060:
-                    {
-                        MessageBox.Show("Не удалось найти БД, указанную в настройках\nПроверьте файл app.config ");
-                        break;
-                    }
+                        {
+                            MessageBox.Show("Не удалось найти БД, указанную в настройках\nПроверьте файл app.config ");
+                            break;
+                        }
 
                     default:
-                    {
-                        throw ex;
-                    }
+                        {
+                            throw ex;
+                        }
                 }
 
             }
