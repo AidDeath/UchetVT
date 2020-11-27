@@ -88,7 +88,7 @@ namespace UchetVT
 
                 }
 
-                DatabaseUtility.ExecStorageProc("sp_CreateUserMSSQL2005_TEST",
+                DatabaseUtility.ExecStorageProc("sp_CreateUserMSSQL2005",
                     new List<SqlParameter>
                     {
                         new SqlParameter("@Name", (object) model.Name ?? DBNull.Value),
@@ -104,19 +104,6 @@ namespace UchetVT
             {
                 MessageBox.Show(e.Message == "PwdEnterCancelled" ? "Создание пользователя отменено" : e.Message);
             }
-
-
-
-            /*
-            new SqlParameter("@Name", model.Name),
-            new SqlParameter("@Position", model.Position),
-            new SqlParameter("@UserName", model.UserName),
-            new SqlParameter("@Password", (object)model.UserPassword ?? DBNull.Value),
-            new SqlParameter("@AccessToRegion", (object)model.AccessToRegion ?? DBNull.Value),
-            new SqlParameter("@AccessToBook", (object)model.AccessToBook ?? DBNull.Value)
-            */
-
-
 
         }
 

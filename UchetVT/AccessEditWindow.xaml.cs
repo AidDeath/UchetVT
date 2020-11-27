@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -65,8 +66,19 @@ namespace UchetVT
                         { Header = "Справочник", DisplayMemberBinding = new Binding() { Path = new PropertyPath("NameBook") } });
 
                         string[] bookAccessArray = AccessString.Split(',');
-
-                        foreach (var book in DB.Books.GetAll())
+                        
+                        ObservableCollection<Book> books = new ObservableCollection<Book>();
+                        DataTable bookTable = DatabaseUtility.GetTable("SELECT * FROM BookBooks");
+                        foreach (DataRow row in bookTable.Rows)
+                        {
+                            books.Add(new Book()
+                            {
+                                Id = row.Field<int>("Id"),
+                                NameBook = row.Field<string>("NameBook")
+                            });
+                        }
+                        
+                        foreach (var book in books)
                         {
                             AccessCollection.Add(new AccessData()
                             {
@@ -96,9 +108,9 @@ namespace UchetVT
             AccessString = string.Join(",", resultArray);
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void ConfirmButton_Pressed(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            this.Close();
         }
     }
 
